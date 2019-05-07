@@ -12,13 +12,21 @@ class CollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak private var textLabel: UILabel!
     @IBOutlet weak private var checkImageView: UIImageView!
-    
+    @IBOutlet weak private var whiteView: UIView!
+
     static var identifier: String {
         return String(describing: self)
     }
 
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
+    }
+
+    override var isSelected: Bool {
+        didSet {
+            whiteView.isHidden = !isSelected
+            checkImageView.isHidden = !isSelected
+        }
     }
 
     override func awakeFromNib() {

@@ -20,6 +20,7 @@ final class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(CollectionViewCell.nib(),
                                 forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.allowsMultipleSelection = true
     }
 
 }

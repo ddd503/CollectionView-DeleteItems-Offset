@@ -25,6 +25,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpR-xE-PAr">
+                        <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="Jls-7a-sBp">
                         <rect key="frame" x="46" y="5" width="34" height="34"/>
                         <constraints>
@@ -35,19 +39,24 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="PpR-xE-PAr" secondAttribute="trailing" id="07y-PM-Lfg"/>
                 <constraint firstAttribute="trailing" secondItem="yXT-Sa-T9N" secondAttribute="trailing" id="0qj-el-edM"/>
+                <constraint firstItem="PpR-xE-PAr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="14u-6j-dR4"/>
                 <constraint firstAttribute="trailing" secondItem="Jls-7a-sBp" secondAttribute="trailing" constant="5" id="57g-Lq-v0T"/>
                 <constraint firstItem="yXT-Sa-T9N" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GZD-Fe-tYs"/>
                 <constraint firstItem="yXT-Sa-T9N" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OMq-OE-tnq"/>
+                <constraint firstAttribute="bottom" secondItem="PpR-xE-PAr" secondAttribute="bottom" id="OjP-gZ-agr"/>
                 <constraint firstItem="Jls-7a-sBp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="SEx-rZ-PM6"/>
                 <constraint firstAttribute="bottom" secondItem="yXT-Sa-T9N" secondAttribute="bottom" id="Xrc-LP-QR6"/>
                 <constraint firstItem="Jls-7a-sBp" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.4" id="bRA-0a-pFj"/>
+                <constraint firstItem="PpR-xE-PAr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="y7n-PP-dGz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="85" height="85"/>
             <connections>
                 <outlet property="checkImageView" destination="Jls-7a-sBp" id="tsy-ly-8a3"/>
                 <outlet property="textLabel" destination="yXT-Sa-T9N" id="ivB-7d-Gn0"/>
+                <outlet property="whiteView" destination="PpR-xE-PAr" id="fc2-O7-aD2"/>
             </connections>
             <point key="canvasLocation" x="163.04347826086959" y="130.24553571428572"/>
         </collectionViewCell>
