@@ -24,13 +24,67 @@
                                 <collectionViewLayout key="collectionViewLayout" id="MmV-Th-77x" customClass="CollectionViewCustomLayout" customModule="CollectionView_DeleteItems_Offset" customModuleProvider="target"/>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7d-PK-iUg">
+                                <rect key="frame" x="302" y="747.5" width="100" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.2666666667" blue="0.050980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="JkA-D8-z5e"/>
+                                    <constraint firstAttribute="width" constant="100" id="bNd-Or-jZx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="25"/>
+                                <state key="normal" title="削除">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapDelete:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R0W-eg-Lud"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oo-mo-PAm">
+                                <rect key="frame" x="12" y="747.5" width="100" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="NZR-eA-5gy"/>
+                                    <constraint firstAttribute="height" constant="100" id="eJR-jD-ACM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="25"/>
+                                <state key="normal" title="全復元">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapAllRestore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fwy-oG-ffc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="j7d-PK-iUg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="1.7" id="1Nf-Dm-hy5"/>
+                            <constraint firstItem="6Oo-mo-PAm" firstAttribute="centerY" secondItem="j7d-PK-iUg" secondAttribute="centerY" id="9ul-wU-inF"/>
                             <constraint firstItem="ykb-NK-f4g" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BiI-uS-I1W"/>
+                            <constraint firstItem="j7d-PK-iUg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.78" id="GQh-ZJ-g4p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ykb-NK-f4g" secondAttribute="trailing" id="PGs-Tt-4Bs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ykb-NK-f4g" secondAttribute="bottom" id="Pet-we-fJu"/>
                             <constraint firstItem="ykb-NK-f4g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VS0-Xp-nw3"/>
+                            <constraint firstItem="6Oo-mo-PAm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="0.3" id="fCT-FS-fwu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -40,6 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
     </scenes>
 </document>

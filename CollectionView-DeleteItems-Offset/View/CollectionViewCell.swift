@@ -36,6 +36,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        isSelected = false
         contentView.backgroundColor = .white
     }
 

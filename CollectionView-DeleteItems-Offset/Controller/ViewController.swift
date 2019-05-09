@@ -23,6 +23,35 @@ final class ViewController: UIViewController {
         collectionView.allowsMultipleSelection = true
     }
 
+    @IBAction func didTapDelete(_ sender: UIButton) {
+        guard let deleteIndexPaths = collectionView.indexPathsForSelectedItems,
+            !deleteIndexPaths.isEmpty else {
+                showAlert(message: "選択中のセルがありません。")
+                return
+        }
+        // 選択したセルの削除
+        let deleteNumbers = deleteIndexPaths.map { $0.item }
+        numbers = numbers.filter { !deleteNumbers.contains($0) }
+        collectionView.deleteItems(at: deleteIndexPaths)
+    }
+
+    @IBAction func didTapAllRestore(_ sender: UIButton) {
+        let deletedNumbers = (0 ..< cellCount).filter { !numbers.contains($0) }
+        guard !deletedNumbers.isEmpty else {
+            showAlert(message: "削除したセルはありません。")
+            return
+        }
+        numbers = (0 ..< cellCount).map { $0 }
+        collectionView.insertItems(at: deletedNumbers.map { IndexPath(item: $0, section: 0) })
+    }
+
+    private func showAlert(title: String? = nil, message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let close = UIAlertAction(title: "とじる", style: .default, handler: nil)
+        alert.addAction(close)
+        present(alert, animated: true)
+    }
+
 }
 
 extension ViewController: UICollectionViewDataSource {
