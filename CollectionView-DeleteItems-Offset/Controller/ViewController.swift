@@ -11,7 +11,7 @@ import UIKit
 final class ViewController: UIViewController {
 
     @IBOutlet weak private var collectionView: UICollectionView!
-    private let cellCount = 100
+    private let cellCount = 50
     private var numbers = [Int]()
     
     override func viewDidLoad() {
@@ -29,8 +29,16 @@ final class ViewController: UIViewController {
                 showAlert(message: "選択中のセルがありません。")
                 return
         }
+
+        guard let customLayout = collectionView.collectionViewLayout as? CollectionViewCustomLayout else {
+            showAlert(message: "レイアウト情報の取得に失敗しました。")
+            return
+        }
+        // trueをセットすることで、次のレイアウト更新時には現在のoffsetが保持される
+        customLayout.isKeepCurrentOffset = true
+
         // 選択したセルの削除
-        let deleteNumbers = deleteIndexPaths.map { $0.item }
+        let deleteNumbers = deleteIndexPaths.compactMap { (collectionView.cellForItem(at: $0) as? CollectionViewCell)?.tag }
         numbers = numbers.filter { !deleteNumbers.contains($0) }
         collectionView.deleteItems(at: deleteIndexPaths)
     }
@@ -41,6 +49,7 @@ final class ViewController: UIViewController {
             showAlert(message: "削除したセルはありません。")
             return
         }
+
         numbers = (0 ..< cellCount).map { $0 }
         collectionView.insertItems(at: deletedNumbers.map { IndexPath(item: $0, section: 0) })
     }
@@ -61,8 +70,9 @@ extension ViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        cell.setText("\(numbers[indexPath.item])")
-        if indexPath.item % 2 == 0 {
+        let tagNumber = numbers[indexPath.item]
+        cell.setInfo(tag: tagNumber)
+        if tagNumber % 2 == 0 {
             cell.setBackgroundColor(.lightGray)
         }
         return cell

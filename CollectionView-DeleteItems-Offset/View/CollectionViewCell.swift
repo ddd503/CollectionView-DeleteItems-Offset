@@ -40,8 +40,9 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
     }
 
-    func setText(_ text: String?) {
-        textLabel.text = text
+    func setInfo(tag: Int) {
+        self.tag = tag
+        textLabel.text = String(tag)
     }
 
     func setBackgroundColor(_ color: UIColor) {

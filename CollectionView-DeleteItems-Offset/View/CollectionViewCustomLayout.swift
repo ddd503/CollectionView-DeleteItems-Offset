@@ -21,14 +21,29 @@ class CollectionViewCustomLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
 
+    // 直近のy軸のoffsetを保持
+    private var lastContentOffsetY = CGFloat.zero
+    // offset保持を行うかどうか
+    var isKeepCurrentOffset = false
+
     // MARK: - Life Cycle
     override func prepare() {
+        if let collectionView = collectionView {
+            lastContentOffsetY = collectionView.contentOffset.y
+        }
         resetAttributes()
         setupAttributes()
     }
 
     override var collectionViewContentSize: CGSize {
-        return CGSize(width: contentWidth, height: contentHeight)
+        let contentSize = CGSize(width: contentWidth, height: contentHeight)
+        // セルの増減があった時にcurrentのoffsetを保つ場合は改めてoffsetをセットし直す（このタイミングでは新しいレイアウトが決まっている）
+        if let collectionView = collectionView {
+            setContentOffsetIfNeeded(shouldSetContentOffset: isKeepCurrentOffset &&
+                (contentSize.height > collectionView.frame.size.height),
+                                     collectionView: collectionView)
+        }
+        return contentSize
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -79,6 +94,14 @@ class CollectionViewCustomLayout: UICollectionViewLayout {
             cellYOffsets[currentColumnNumber] = cellYOffsets[currentColumnNumber] + cellLength
             currentColumnNumber = currentColumnNumber < (numberOfColumns - 1) ? currentColumnNumber + 1 : 0
             addAttributes(cellFrame: cellFrame, indexPath: indexPath)
+        }
+    }
+
+    private func setContentOffsetIfNeeded(shouldSetContentOffset: Bool, collectionView: UICollectionView) {
+        if shouldSetContentOffset {
+            let newOffset = CGPoint(x: collectionView.frame.origin.x, y: lastContentOffsetY)
+            collectionView.setContentOffset(newOffset, animated: false)
+            isKeepCurrentOffset = false
         }
     }
 
