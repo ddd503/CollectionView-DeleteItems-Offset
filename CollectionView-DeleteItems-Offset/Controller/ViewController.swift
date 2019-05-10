@@ -18,27 +18,20 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         numbers = (0 ..< cellCount).map { $0 }
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(CollectionViewCell.nib(),
                                 forCellWithReuseIdentifier: CollectionViewCell.identifier)
         collectionView.allowsMultipleSelection = true
     }
 
     @IBAction func didTapDelete(_ sender: UIButton) {
-        guard let deleteIndexPaths = collectionView.indexPathsForSelectedItems,
-            !deleteIndexPaths.isEmpty else {
+        guard let deleteIndexPaths = collectionView.indexPathsForSelectedItems, !deleteIndexPaths.isEmpty else {
                 showAlert(message: "選択中のセルがありません。")
                 return
         }
 
-        guard let customLayout = collectionView.collectionViewLayout as? CollectionViewCustomLayout else {
-            showAlert(message: "レイアウト情報の取得に失敗しました。")
-            return
-        }
-        // trueをセットすることで、次のレイアウト更新時には現在のoffsetが保持される
-        customLayout.isKeepCurrentOffset = true
-
-        // 選択したセルの削除
-        let deleteNumbers = deleteIndexPaths.compactMap { (collectionView.cellForItem(at: $0) as? CollectionViewCell)?.tag }
+        let deleteNumbers = deleteIndexPaths.compactMap { (collectionView.dataSource?.collectionView(self.collectionView,
+                                                                                                     cellForItemAt: $0) as? CollectionViewCell)?.tag }
         numbers = numbers.filter { !deleteNumbers.contains($0) }
         collectionView.deleteItems(at: deleteIndexPaths)
     }
@@ -76,5 +69,18 @@ extension ViewController: UICollectionViewDataSource {
             cell.setBackgroundColor(.lightGray)
         }
         return cell
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let length = collectionView.frame.size.width / 3
+        return CGSize(width: length, height: length)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
